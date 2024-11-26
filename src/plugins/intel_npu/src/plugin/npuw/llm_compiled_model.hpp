@@ -11,15 +11,16 @@
 namespace ov {
 namespace npuw {
 
-class LLMCompiledModel : public ov::npuw::ICompiledModel {
+class LLMCompiledModel : public ov::ICompiledModel {
     using GetPropertiesMap =
-        std::map<std::string, std::tuple<ov::PropertyMutability, std::function<ov::Any(const ::intel_npu::Config&)>>>;
+        std::map<std::string, std::tuple<ov::PropertyMutability,
+                 std::function<ov::Any(const ::intel_npu::Config&)>>>;
 public:
     struct KVCacheDesc {
-        uint32_t max_prompt_size;
-        uint32_t total_size;
-        uint32_t num_stored_tokens;
-        uint32_t dim;
+        uint32_t max_prompt_size = 1024u;
+        uint32_t total_size = 1152u;
+        uint32_t num_stored_tokens = 0u;
+        uint32_t dim = 2u;
     };
 
     LLMCompiledModel(const std::shared_ptr<ov::Model>& model,
